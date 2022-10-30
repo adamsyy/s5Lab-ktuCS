@@ -3,7 +3,7 @@
 #include<unistd.h>
 #include<sys/types.h>
 #include<dirent.h>
-
+#include <string.h>
 
 
 void main(){
@@ -14,11 +14,47 @@ scanf("%s",dirname);
 mkdir(dirname);
 printf("Directory created successfully");
 
-create_file("akash.txt",dirname);
-search_files("akash.txt",dirname);
-
-
+while(1){
+int choice;
+printf("1. Create a file 2. Delete a file 3. Search a file 4. List files 5. Exit");
+printf("Enter your choice: ");
+scanf("%d",&choice);
+switch(choice){
+case 1:
+{
+char filename[20];
+printf("Enter the file name: ");
+scanf("%s",filename);
+create_file(filename,dirname);
+break;
+}
+case 2:
+{
+char filename[20];
+printf("Enter the file name: ");
+scanf("%s",filename);
+delete_file(filename,dirname);
+break;
+}
+case 3:
+{
+char filename[20];
+printf("Enter the file name: ");
+scanf("%s",filename);
+search_files(filename,dirname);
+break;
+}
+case 4:
+{
 display_files(dirname);
+break;
+}
+case 5:
+{
+exit(0);
+}
+}
+}
     }
 
     //function to create file in the directory
@@ -50,20 +86,7 @@ display_files(dirname);
     }
     }
 
-    // function to search file in the directory
-    // void search_file(char *filename, char *dirname){
-    // char path[100];
-    // sprintf(path, "%s/%s", dirname, filename);
 
-
-    // // check if file exists
-    // if(access(path, F_OK) != -1){
-    //     printf("File exists");
-    // }
-    // else{
-    //     printf("File does not exist");
-    // }
-    // }
 
     //display all files in the directory
     void display_files(char *dirname){
